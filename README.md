@@ -40,7 +40,7 @@ A comprehensive full-stack web application for calculating and managing electric
 - **JSON**: Data storage for client information
 - **CORS**: Cross-origin resource sharing
 
-## � Architecture Overview
+##  Architecture Overview
 
 ### Backend Responsibilities
 The Node.js/Express backend serves as the data layer and API provider:
@@ -73,7 +73,7 @@ The React frontend handles all user interactions and business logic:
 3. **Frontend**: Handles all user inputs and calculations
 4. **Frontend**: Displays results in real-time without backend interaction
 
-## �📁 Project Structure
+## 📁 Project Structure
 
 ```
 sv/
@@ -222,7 +222,7 @@ Each client has a unique background color making it easy to visually distinguish
 - Minimum charges display KVA allocation details
 
 ### Responsive Design
-The application works seamlessly on both desktop and mobile devices with proper touch-friendly input fields.
+The application works seamlessly on desktop.
 
 ## 📝 Notes
 
@@ -235,15 +235,11 @@ The application works seamlessly on both desktop and mobile devices with proper 
 ## 🔮 Future Enhancements
 
 - PDF bill generation
-- Historical data storage
 - Email bill delivery
-- Advanced reporting and analytics
-- User authentication and role management
-- Backup and restore functionality
 
 ## 📄 License
 
-This project is developed for SV Plaza electricity bill management and is proprietary software.
+This project is developed for SV Plaza and is proprietary software.
 
 ## 🤝 Support
 
