@@ -1,0 +1,7 @@
+[
+  { "id": 1, "name": "Park Avenue Hotel (MWH)", "mwh": true, "minCharge": 21645 },
+  { "id": 2, "name": "Mishwar (MWH)", "mwh": true, "minCharge": 11655 },
+  { "id": 3, "name": "Prasad Eye Hospital", "mwh": false, "minCharge": 3330 },
+  { "id": 4, "name": "V4 Group", "mwh": false, "minCharge": 1850 },
+  { "id": 5, "name": "Common Area/Lift", "mwh": false, "minCharge": 3330 }
+]
