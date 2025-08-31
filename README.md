@@ -9,7 +9,7 @@ A comprehensive full-stack web application for calculating and managing electric
 - **Real-time Calculations**: Live updates for net readings, losses, charges, and totals
 - **Multiple Unit Support**: Both MWH and KWH meter readings
 - **Loss Calculation**: Automatic calculation of difference between main and sub meters
-- **Tax & Fuel Costs**: Individual tax and fuel cost inputs for each client
+- **Tax and Fuel Costs**: Individual tax and fuel cost inputs for each client
 - **Professional Dashboard**: Clean, responsive table-based interface
 
 ### Advanced Features
