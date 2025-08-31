@@ -1,6 +1,6 @@
 # SV Plaza Electricity Bill
 
-A comprehensive full-stack web application for calculating and managing electricity bills among multiple clients in SV Plaza. The application provides real-time calculations, interactive dashboard, and professional bill generation with support for both MWH and KWH readings.
+A comprehensive full-stack web application for calculating and managing electricity bills among multiple clients in SV Plaza including V4 group. The application provides real-time calculations, interactive dashboard, and professional bill generation with support for both MWH and KWH readings.
 
 ## 🚀 Features
 
