@@ -2,14 +2,15 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './styles.css';
-import html2pdf from 'html2pdf.js';
+
 
 const RATE = 5.95;
 
 
 function App() {
   // PDF download handler
-  const handleDownloadPDF = () => {
+  const handleDownloadPDF = async () => {
+    const html2pdf = (await import('html2pdf.js')).default;
     const monthYear = new Date().toLocaleString('default', { month: 'long', year: 'numeric' });
     const fileName = `SV Plaza Electricity Bill ${monthYear}`;
     const element = document.getElementById('bill-content');
