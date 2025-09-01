@@ -148,7 +148,7 @@ function App() {
       <div id="bill-content">
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '30px 0 20px 0' }}>
           <span style={{ fontSize: '2.5rem', fontWeight: 'bold', fontFamily: 'inherit' }}>
-            SV Plaza Electricity Bill
+            S V Plaza Electricity Bill
           </span>
           <span style={{ fontSize: '2.5rem', fontWeight: 'bold', fontFamily: 'inherit', marginLeft: '18px' }}>
             {getMonthYearString()}
