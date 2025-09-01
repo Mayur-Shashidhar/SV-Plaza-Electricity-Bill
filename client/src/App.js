@@ -2,17 +2,25 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './styles.css';
-
+import html2pdf from 'html2pdf.js';
 
 const RATE = 5.95;
 
 
 function App() {
   // PDF download handler
-  const handleDownloadPDF = async () => {
-    const html2pdf = (await import('html2pdf.js')).default;
+  const handleDownloadPDF = () => {
     const monthYear = new Date().toLocaleString('default', { month: 'long', year: 'numeric' });
     const fileName = `SV Plaza Electricity Bill ${monthYear}`;
+    // Temporarily update the table for PDF export
+    const tableRows = document.querySelectorAll('#bill-content tbody tr');
+    tableRows.forEach((row, i) => {
+      const td = row.querySelectorAll('td')[6];
+      if (td) {
+        td.setAttribute('data-original', td.innerHTML);
+        td.innerHTML = `${(netReadings[i] + clientLoss[i]).toFixed(2)} * ₹5.95 = ${formatINR(totalReadingRs[i])}`;
+      }
+    });
     const element = document.getElementById('bill-content');
     html2pdf().set({
       margin: 0.5,
@@ -21,7 +29,16 @@ function App() {
       html2canvas: { scale: 2, scrollY: 0 },
       jsPDF: { unit: 'in', format: 'a3', orientation: 'landscape' },
       pagebreak: { mode: ['avoid-all'] }
-    }).from(element).save();
+    }).from(element).save().then(() => {
+      // Restore original table after PDF export
+      tableRows.forEach((row, i) => {
+        const td = row.querySelectorAll('td')[6];
+        if (td && td.hasAttribute('data-original')) {
+          td.innerHTML = td.getAttribute('data-original');
+          td.removeAttribute('data-original');
+        }
+      });
+    });
   };
   const [clients, setClients] = useState([]);
   const [readings, setReadings] = useState({});
@@ -30,7 +47,7 @@ function App() {
   const [minCharges, setMinCharges] = useState({});
 
   useEffect(() => {
-  axios.get('https://sv-plaza-electricity-bill.onrender.com/api/clients').then(res => {
+    axios.get('https://sv-plaza-electricity-bill.onrender.com/api/clients').then(res => {
       setClients(res.data);
       // Initialize readings and minCharges
       const initialReadings = {};
@@ -154,7 +171,7 @@ function App() {
                 <td>{netReadings[i].toFixed(2)}</td>
                 <td>{Math.round(clientLoss[i])}</td>
                 <td>
-                  {formatINR(totalReadingRs[i])}
+                  {`${(netReadings[i] + clientLoss[i]).toFixed(2)} * ₹5.95 = ${formatINR(totalReadingRs[i])}`}
                 </td>
                 <td style={{ textAlign: 'center' }}>
                   {(() => {
