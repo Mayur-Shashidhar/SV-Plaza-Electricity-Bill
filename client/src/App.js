@@ -8,10 +8,24 @@ const RATE = 5.95;
 
 
 function App() {
+  // State for selected month and year
+  const [selectedDate, setSelectedDate] = useState(() => {
+    const now = new Date();
+    return { month: now.getMonth(), year: now.getFullYear() };
+  });
+
+  // Helper to get month name
+  const getMonthYearString = () => {
+    const monthName = new Date(selectedDate.year, selectedDate.month).toLocaleString('default', { month: 'long' });
+    return `${monthName} ${selectedDate.year}`;
+  };
+
   // PDF download handler
   const handleDownloadPDF = () => {
-    const monthYear = new Date().toLocaleString('default', { month: 'long', year: 'numeric' });
-    const fileName = `SV Plaza Electricity Bill ${monthYear}`;
+    const fileName = `SV Plaza Electricity Bill ${getMonthYearString()}`;
+    // Hide calendar picker for PDF
+    const calendarPicker = document.getElementById('calendar-picker');
+    if (calendarPicker) calendarPicker.style.display = 'none';
     // Temporarily update the table for PDF export
     const tableRows = document.querySelectorAll('#bill-content tbody tr');
     tableRows.forEach((row, i) => {
@@ -38,6 +52,8 @@ function App() {
           td.removeAttribute('data-original');
         }
       });
+      // Restore calendar picker
+      if (calendarPicker) calendarPicker.style.display = '';
     });
   };
   const [clients, setClients] = useState([]);
@@ -135,7 +151,28 @@ function App() {
             SV Plaza Electricity Bill
           </span>
           <span style={{ fontSize: '2.5rem', fontWeight: 'bold', fontFamily: 'inherit', marginLeft: '18px' }}>
-            {new Date().toLocaleString('default', { month: 'long', year: 'numeric' })}
+            {getMonthYearString()}
+          </span>
+          <span id="calendar-picker" style={{ marginLeft: 24 }}>
+            <select
+              value={selectedDate.month}
+              onChange={e => setSelectedDate(d => ({ ...d, month: Number(e.target.value) }))}
+              style={{ fontSize: '1.1rem', padding: '4px 8px', marginRight: 8 }}
+            >
+              {Array.from({ length: 12 }, (_, i) => (
+                <option key={i} value={i}>{new Date(2000, i).toLocaleString('default', { month: 'long' })}</option>
+              ))}
+            </select>
+            <select
+              value={selectedDate.year}
+              onChange={e => setSelectedDate(d => ({ ...d, year: Number(e.target.value) }))}
+              style={{ fontSize: '1.1rem', padding: '4px 8px' }}
+            >
+              {Array.from({ length: 10 }, (_, i) => {
+                const year = new Date().getFullYear() - 5 + i;
+                return <option key={year} value={year}>{year}</option>;
+              })}
+            </select>
           </span>
         </div>
         <table border="1" cellPadding="8" style={{ 
