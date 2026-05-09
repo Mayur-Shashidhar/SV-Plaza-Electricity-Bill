@@ -62,7 +62,7 @@ function App() {
   const [minCharges, setMinCharges] = useState({});
 
   useEffect(() => {
-    axios.get('https://sv-plaza-electricity-bill.onrender.com').then(res => {
+    axios.get('https://sv-plaza-electricity-bill.onrender.com/api/clients').then(res => {
       setClients(res.data);
       // Initialize readings and minCharges
       const initialReadings = {};
