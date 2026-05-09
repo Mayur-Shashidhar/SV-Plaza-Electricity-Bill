@@ -1,10 +1,9 @@
-
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './styles.css';
 import html2pdf from 'html2pdf.js';
 
-const RATE = 5.95;
+const RATE = 5.70;
 
 
 function App() {
@@ -32,7 +31,7 @@ function App() {
       const td = row.querySelectorAll('td')[6];
       if (td) {
         td.setAttribute('data-original', td.innerHTML);
-        td.innerHTML = `${(netReadings[i] + clientLoss[i]).toFixed(2)} * ₹5.95 = ${formatINR(totalReadingRs[i])}`;
+        td.innerHTML = `${(netReadings[i] + clientLoss[i]).toFixed(2)} * ₹5.70 = ${formatINR(totalReadingRs[i])}`;
       }
     });
     const element = document.getElementById('bill-content');
@@ -63,7 +62,7 @@ function App() {
   const [minCharges, setMinCharges] = useState({});
 
   useEffect(() => {
-    axios.get('https://sv-plaza-electricity-bill.onrender.com/api/clients').then(res => {
+    axios.get('https://sv-plaza-electricity-bill.onrender.com').then(res => {
       setClients(res.data);
       // Initialize readings and minCharges
       const initialReadings = {};
@@ -208,17 +207,17 @@ function App() {
                 <td>{netReadings[i].toFixed(2)}</td>
                 <td>{Math.round(clientLoss[i])}</td>
                 <td>
-                  {`${(netReadings[i] + clientLoss[i]).toFixed(2)} * ₹5.95 = ${formatINR(totalReadingRs[i])}`}
+                  {`${(netReadings[i] + clientLoss[i]).toFixed(2)} * ₹5.70 = ${formatINR(totalReadingRs[i])}`}
                 </td>
                 <td style={{ textAlign: 'center' }}>
                   {(() => {
                     // Hardcoded values for display, matching your image
                     const minChargeLabels = [
-                      '58.5 KV * ₹370 = ₹21,645',
-                      '31.5 KV * ₹370 = ₹11,655',
-                      '9 KV * ₹370 = ₹3,330',
-                      '5 KV * ₹370 = ₹1,850',
-                      '9 KV * ₹370 = ₹3,330'
+                      '58.5 KV * ₹375 = ₹21,938',
+                      '31.5 KV * ₹375 = ₹11,813',
+                      '9 KV * ₹375 = ₹3,375',
+                      '5 KV * ₹375 = ₹1,875',
+                      '9 KV * ₹375 = ₹3,375'
                     ];
                     return minChargeLabels[i];
                   })()}
